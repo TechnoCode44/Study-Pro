@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 
+from json_loader import *
+
 app = FastAPI()
 
 @app.get("/")
