@@ -1,8 +1,10 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
 
 from json_loader import *
 
 app = FastAPI()
+app.mount("/audio", StaticFiles(directory="Audio"), name="Audio")
 
 @app.get("/")
 def index():
