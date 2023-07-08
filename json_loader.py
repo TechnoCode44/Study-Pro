@@ -9,5 +9,5 @@ def load_json(filename):
         return None
 
 def save_json(dictionary, filename):
-    with open(filename, "w", encoding="utf-8") as file:
+    with open(f"Database/{filename}", "w", encoding="utf-8") as file:
         dump(dictionary, file, ensure_ascii=False, indent=4)
