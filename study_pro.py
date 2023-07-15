@@ -10,11 +10,11 @@ from os.path import isfile
 app = FastAPI()
 
 @app.get("/")
-def index():
+async def index():
     return "Hello, World!"
 
 @app.get("/database/{file}")
-def database(file):
+async def database(file):
     file_content = load_json(f"Database/{file}.json")
     
     if file_content == None:
@@ -22,7 +22,7 @@ def database(file):
     return file_content
 
 @app.get("/audio/course/{course}/{question_number}")
-def audio(course: str, question_number: int):
+async def audio(course: str, question_number: int):
     path = f"Audio/{course}/Q{question_number}.mp3"
     audio_exists = isfile(path)
 
@@ -32,7 +32,7 @@ def audio(course: str, question_number: int):
         raise HTTPException(404, "File not found")
     
 @app.get("/audio/word/{word}")
-def word(word: str):
+async def word(word: str):
     word = word.lower()
     path = f"Audio/Words/{word}.mp3"
     audio_exists = isfile(path)
