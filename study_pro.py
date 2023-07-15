@@ -38,6 +38,6 @@ async def word(word: str):
     audio_exists = isfile(path)
 
     if not audio_exists: # Should be POST request
-        save_audio(word, "Words", word)
+        await save_audio(word, "Words", word)
     
     return FileResponse(path)
