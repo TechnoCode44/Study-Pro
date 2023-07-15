@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from json_loader import *
 from audio import save_audio
@@ -32,14 +33,13 @@ def audio(course: str, question_number: int):
     else:
         raise HTTPException(404, "File not found")
     
-@app.get("/audio/word")
+@app.get("/audio/word/{word}")
 def word(word: str):
     word = word.lower()
     path = f"Audio/Words/{word}.mp3"
     audio_exists = isfile(path)
-    request_path = f"/audio/file/Words/{word}.mp3"
 
     if not audio_exists: # Should be POST request
-        save_audio(word, "Words", "word.mp3")
+        save_audio(word, "Words", word)
     
-    return request_path
+    return FileResponse(path)
