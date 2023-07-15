@@ -8,7 +8,7 @@ from audio import save_audio
 from os.path import isfile
 
 app = FastAPI()
-app.mount("/audio/file", StaticFiles(directory="Audio"), name="Audio")
+app.mount("/audio/file", StaticFiles(directory="Audio"), name="Audio") # Whats the point of this???
 
 @app.get("/")
 def index():
@@ -22,14 +22,13 @@ def database(file):
         raise HTTPException(404, "File not found")
     return file_content
 
-@app.get("/audio")
+@app.get("/audio/{course}/{question_number}")
 def audio(course: str, question_number: int):
     path = f"Audio/{course}/Q{question_number}.mp3"
     audio_exists = isfile(path)
 
     if audio_exists:
-        request_path = f"/audio/file/{course}/Q{question_number}.mp3" # Single letter change than "path" variable
-        return request_path
+        return FileResponse(path)
     else:
         raise HTTPException(404, "File not found")
     
