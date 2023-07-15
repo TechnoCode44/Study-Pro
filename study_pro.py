@@ -27,7 +27,7 @@ def audio(course: str, question_number: int):
     audio_exists = isfile(path)
 
     if audio_exists:
-        request_path = f"/audio/file/{course}/Q{question_number}.mp3" # Single letter change then "path" variable
+        request_path = f"/audio/file/{course}/Q{question_number}.mp3" # Single letter change than "path" variable
         return request_path
     else:
         raise HTTPException(404, "File not found")

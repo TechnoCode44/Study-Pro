@@ -10,3 +10,4 @@ A api for a simple flash card system.
 /database/foo # Returns questions & answers to foo in json
 /database/bar # Returns questions & answers to bar in json
 ```
+
