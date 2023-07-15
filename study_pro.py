@@ -21,7 +21,7 @@ def database(file):
         raise HTTPException(404, "File not found")
     return file_content
 
-@app.get("/audio/{course}/{question_number}")
+@app.get("/audio/course/{course}/{question_number}")
 def audio(course: str, question_number: int):
     path = f"Audio/{course}/Q{question_number}.mp3"
     audio_exists = isfile(path)
