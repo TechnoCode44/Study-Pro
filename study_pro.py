@@ -2,11 +2,12 @@ from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 
 from json_loader import *
+from audio import save_audio
 
 from os.path import isfile
 
 app = FastAPI()
-app.mount("/audio", StaticFiles(directory="Audio"), name="Audio")
+app.mount("/audio/file", StaticFiles(directory="Audio"), name="Audio")
 
 @app.get("/")
 def index():
@@ -26,7 +27,7 @@ def audio(course: str, question_number: int):
     audio_exists = isfile(path)
 
     if audio_exists:
-        request_path = f"/audio/{course}/Q{question_number}.mp3" # Single letter change then "path" variable
+        request_path = f"/audio/file/{course}/Q{question_number}.mp3" # Single letter change then "path" variable
         return request_path
     else:
         raise HTTPException(404, "File not found")
