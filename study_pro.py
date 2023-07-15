@@ -31,3 +31,15 @@ def audio(course: str, question_number: int):
         return request_path
     else:
         raise HTTPException(404, "File not found")
+    
+@app.get("/audio/word")
+def word(word: str):
+    word = word.lower()
+    path = f"Audio/Words/{word}.mp3"
+    audio_exists = isfile(path)
+    request_path = f"/audio/file/Words/{word}.mp3"
+
+    if not audio_exists: # Should be POST request
+        save_audio(word, "Words", "word.mp3")
+    
+    return request_path
