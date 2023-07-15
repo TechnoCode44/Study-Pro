@@ -8,7 +8,6 @@ from audio import save_audio
 from os.path import isfile
 
 app = FastAPI()
-app.mount("/audio/file", StaticFiles(directory="Audio"), name="Audio") # Whats the point of this???
 
 @app.get("/")
 def index():
