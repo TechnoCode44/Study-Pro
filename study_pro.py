@@ -13,9 +13,9 @@ app.mount("/audio/file", StaticFiles(directory="Audio"), name="Audio")
 def index():
     return "Hello, World!"
 
-@app.get("/database/")
+@app.get("/database/{file}")
 def database(file):
-    file_content = load_json(f"Database/{file}")
+    file_content = load_json(f"Database/{file}.json")
     
     if file_content == None:
         raise HTTPException(404, "File not found")
